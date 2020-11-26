@@ -6,7 +6,6 @@ import com.example.codeclan.bookingsystem.models.Customer;
 import com.example.codeclan.bookingsystem.repositories.BookingRepository;
 import com.example.codeclan.bookingsystem.repositories.CourseRepository;
 import com.example.codeclan.bookingsystem.repositories.CustomerRepository;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +50,7 @@ class BookingsystemApplicationTests {
 
 	@Test
 	public void canFindBookingByDate(){
-		List<Booking> foundBooking = bookingRepository.findByDate("26-11-20");
+		List<Booking> foundBooking = bookingRepository.findByDateIgnoreCase("26-11-20");
 		assertEquals(2, foundBooking.size());
 		assertEquals("26-11-20", foundBooking.get(0).getDate());
 	}
@@ -65,7 +64,7 @@ class BookingsystemApplicationTests {
 
 	@Test
 	public void  canFindCourseByCustomerName(){
-		List<Course> foundCourse = courseRepository.findByBookingsCustomerName("Cam");
+		List<Course> foundCourse = courseRepository.findByBookingsCustomerNameIgnoreCase("Cam");
 		assertEquals(2, foundCourse.size());
 		assertEquals("Intro to Spring", foundCourse.get(0).getName());
 		assertEquals("Intro to Java", foundCourse.get(1).getName());
@@ -73,7 +72,7 @@ class BookingsystemApplicationTests {
 
 	@Test
 	public void canFindCustomersByCourse(){
-		List<Customer> foundCustomer = customerRepository.findByBookingsCourseName("Intro to Spring");
+		List<Customer> foundCustomer = customerRepository.findByBookingsCourseNameIgnoreCase("Intro to Spring");
 		assertEquals(2, foundCustomer.size());
 		assertEquals("Cam", foundCustomer.get(0).getName());
 		assertEquals("David", foundCustomer.get(1).getName());
@@ -81,8 +80,8 @@ class BookingsystemApplicationTests {
 
 	@Test
 	public void canFindCustomersByTownAndCourse(){
-		List<Customer> foundCustomer = customerRepository.findByBookingsCourseNameAndCustomerTown(
-				"Intro to Spring", "Motherwell");
+		List<Customer> foundCustomer = customerRepository.findByBookingsCourseNameIgnoreCaseAndCustomerTownIgnoreCase(
+				"Intro to Spring", "motherwell");
 		assertEquals(1, foundCustomer.size());
 		assertEquals("Cam", foundCustomer.get(0).getName());
 		assertEquals("Motherwell", foundCustomer.get(0).getCustomerTown());
@@ -90,8 +89,8 @@ class BookingsystemApplicationTests {
 
 	@Test
 	public void canFindCustomersOlderThanAgeInCustomerTownForCourse(){
-		List<Customer> foundCustomer = customerRepository.findByAgeGreaterThanAndCustomerTownAndBookingsCourseName(
-				24, "Glasgow", "Intro to Java"
+		List<Customer> foundCustomer = customerRepository.findByAgeGreaterThanAndCustomerTownIgnoreCaseAndBookingsCourseNameIgnoreCase(
+				24, "Glasgow", "intro to java"
 		);
 		assertEquals(1, foundCustomer.size());
 		assertEquals("Gregg", foundCustomer.get(0).getName());
@@ -101,7 +100,7 @@ class BookingsystemApplicationTests {
 
 	@Test
 	public void cannotFindCustomersOlderThanAgeInCustomerTownForCourse(){
-		List<Customer> foundCustomer = customerRepository.findByAgeGreaterThanAndCustomerTownAndBookingsCourseName(
+		List<Customer> foundCustomer = customerRepository.findByAgeGreaterThanAndCustomerTownIgnoreCaseAndBookingsCourseNameIgnoreCase(
 				40, "Glasgow", "Intro to Java"
 		);
 		assertEquals(0, foundCustomer.size());

@@ -1,6 +1,5 @@
 package com.example.codeclan.bookingsystem.controllers;
 
-import com.example.codeclan.bookingsystem.models.Course;
 import com.example.codeclan.bookingsystem.models.Customer;
 import com.example.codeclan.bookingsystem.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +24,13 @@ public class CustomerController {
             @RequestParam(name="age", required = false) Integer age
     ){
         if (age != null && customerTown != null && courseName != null){
-            return new ResponseEntity<>(customerRepository.findByAgeGreaterThanAndCustomerTownAndBookingsCourseName(age, customerTown, courseName), HttpStatus.OK);
+            return new ResponseEntity<>(customerRepository.findByAgeGreaterThanAndCustomerTownIgnoreCaseAndBookingsCourseNameIgnoreCase(age, customerTown, courseName), HttpStatus.OK);
         }
         if (courseName != null && customerTown != null){
-            return new ResponseEntity<>(customerRepository.findByBookingsCourseNameAndCustomerTown(courseName, customerTown), HttpStatus.OK);
+            return new ResponseEntity<>(customerRepository.findByBookingsCourseNameIgnoreCaseAndCustomerTownIgnoreCase(courseName, customerTown), HttpStatus.OK);
         }
         if (courseName != null){
-            return new ResponseEntity<>(customerRepository.findByBookingsCourseName(courseName), HttpStatus.OK);
+            return new ResponseEntity<>(customerRepository.findByBookingsCourseNameIgnoreCase(courseName), HttpStatus.OK);
         }
         return new ResponseEntity<>(customerRepository.findAll(), HttpStatus.OK);
     }
