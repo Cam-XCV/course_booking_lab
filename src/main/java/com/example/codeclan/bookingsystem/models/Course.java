@@ -15,17 +15,17 @@ public class Course {
     private Long id;
     @Column(name = "name")
     private String name;
-    @Column(name = "town")
-    private String town;
+    @Column(name = "course_town")
+    private String courseTown;
     @Column(name = "rating")
     private int rating;
     @JsonIgnoreProperties({"course"})
     @OneToMany(mappedBy = "course")
     private List<Booking> bookings;
 
-    public Course(String name, String town, int rating) {
+    public Course(String name, String courseTown, int rating) {
         this.name = name;
-        this.town = town;
+        this.courseTown = courseTown;
         this.rating = rating;
         this.bookings = new ArrayList<Booking>();
     }
@@ -56,12 +56,12 @@ public class Course {
         this.name = name;
     }
 
-    public String getTown() {
-        return town;
+    public String getCourseTown() {
+        return courseTown;
     }
 
-    public void setTown(String town) {
-        this.town = town;
+    public void setCourseTown(String courseTown) {
+        this.courseTown = courseTown;
     }
 
     public int getRating() {

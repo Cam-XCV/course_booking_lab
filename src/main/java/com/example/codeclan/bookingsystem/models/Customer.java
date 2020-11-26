@@ -15,17 +15,17 @@ public class Customer {
     private Long id;
     @Column(name = "name")
     private String name;
-    @Column(name="town")
-    private String town;
+    @Column(name="customer_town")
+    private String customerTown;
     @Column(name="age")
     private int age;
     @JsonIgnoreProperties({"customer"})
     @OneToMany(mappedBy = "customer")
     private List<Booking> bookings;
 
-    public Customer(String name, String town, int age) {
+    public Customer(String name, String customerTown, int age) {
         this.name = name;
-        this.town = town;
+        this.customerTown = customerTown;
         this.age = age;
         this.bookings = new ArrayList<Booking>();
     }
@@ -48,12 +48,12 @@ public class Customer {
         this.name = name;
     }
 
-    public String getTown() {
-        return town;
+    public String getCustomerTown() {
+        return customerTown;
     }
 
-    public void setTown(String town) {
-        this.town = town;
+    public void setCustomerTown(String customerTown) {
+        this.customerTown = customerTown;
     }
 
     public int getAge() {
