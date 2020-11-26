@@ -31,17 +31,17 @@ class BookingsystemApplicationTests {
 	void contextLoads() {
 	}
 
-	@Test
-	public void canAddCustomerBookingAndCourse(){
-		Course course = new Course("Intro to Spring", "Glasgow", 4);
-		Customer customer = new Customer("David", "Glasgow", 21);
-		courseRepository.save(course);
-		customerRepository.save(customer);
-		Booking booking = new Booking("26-11-20", course, customer);
-		bookingRepository.save(booking);
-		assertEquals("Intro to Spring", courseRepository.getOne(1L).getName());
-		assertEquals("David", customerRepository.getOne(1L).getName());
-		assertEquals("26-11-20", bookingRepository.getOne(1L).getDate());
-	}
+//	@Test
+//	public void canAddCustomerBookingAndCourse(){
+//		Course course = new Course("Intro to Spring", "Glasgow", 4);
+//		Customer customer = new Customer("David", "Glasgow", 21);
+//		courseRepository.save(course);
+//		customerRepository.save(customer);
+//		Booking booking = new Booking("26-11-20", course, customer);
+//		bookingRepository.save(booking);
+//		assertEquals("Intro to Spring", courseRepository.getOne(1L).getName());
+//		assertEquals("David", customerRepository.getOne(1L).getName());
+//		assertEquals("26-11-20", bookingRepository.getOne(1L).getDate());
+//	}
 
 }
