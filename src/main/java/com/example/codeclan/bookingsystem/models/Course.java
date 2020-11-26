@@ -1,14 +1,26 @@
 package com.example.codeclan.bookingsystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name="courses")
 public class Course {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "town")
     private String town;
+    @Column(name = "rating")
     private int rating;
+    @JsonIgnoreProperties({"course"})
+    @OneToMany(mappedBy = "course")
     private List<Booking> bookings;
 
     public Course(String name, String town, int rating) {
